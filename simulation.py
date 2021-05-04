@@ -11,10 +11,10 @@ R = 10                    # solenoid resistance [Ohms]
 L = 0.05                  # solenoid length of coil [m]
 m = 0.05                  # permanent magnet mass [kg]
 g = 9.8                   # acceleration due to gravity [m^2]
-i = 5/R                   # current through electromagnet [A]
+i = 10/R                   # current through electromagnet [A]
 A = .01                   # Cross-sectional Area of Electromagnet Plunger [m^2]
 P1 = mu_0*(N*A*i)/L       # Electromagnet Flux [Wb]
-P2 = .005                 # Permanent Magnet Flux [Wb]
+P2 = .0005                 # Permanent Magnet Flux [Wb]
 Xout = 0                  # Output distance between magnet and x_0 [m]
 Vin = 0                   # Difference in Voltage from v_0 [V]
 Vh = 0                    # Measured Voltage from Hall-Effect Sensor [V]
@@ -28,6 +28,7 @@ K_nov =  ((P2*N*A) / (4*np.pi*L*R)) * (1/(x_0**2))
 Kv = (P2*N*A) / (4*np.pi*L*R) * (1/(x_0**2))
 Kx_nov = ((P2*N*A) / (4*np.pi*L*R)) * (-2/(x_0**3))
 v_0 = (-m*g) / (x_0*Kx_nov + Kv - K_nov)          # voltage at distance of levitation [V]
+print(P1)
 
 # plug v_0 back in 
 K = (P2*N*A) / (4*np.pi*L*R) * (v_0/(x_0**2))
@@ -35,8 +36,11 @@ Kx = (P2*N*A) / (4*np.pi*L*R) * (-2*v_0/(x_0**3))
 
 #Force Calculations
 i = v_0/R
-P1 = mu_0*(N*A*i)/L  
-F_m = (1/(mu_0*4*np.pi))*((P1*P2)/(x_0**2))
+P1 = mu_0*((N*A*i)/L)
+#F_m = (1/(mu_0*4*np.pi))*((P1*P2)/(x_0**2))
+x = x_0
+v = v_0
+F_m = 2*(((P2*N*A*v_0)/(4*np.pi*L*R*(x_0**2)))-((2*v_0*P2*N*A)/((x_0**3)*4*np.pi*L*R))*(x-x_0)+((P2*N*A)/((x_0**2)*4*np.pi*L*R))*(v-v_0))
 F_ext = F_m-(m*g)
 print(f"Gravity Force: {m*g}")
 print(f"Magnetic Force: {F_m}")
