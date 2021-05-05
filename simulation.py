@@ -7,16 +7,16 @@ import control
 #System Parameters
 N = 20                    # Num Coils
 mu_0 = (4*np.pi*10**(-7)) # Absolute permeability constant 
-R = 10                    # solenoid resistance [Ohms]
-L = 0.05                  # solenoid length of coil [m]
-m = 0.05                  # permanent magnet mass [kg]
-g = 9.8                   # acceleration due to gravity [m^2]          
+R = 10                    # Solenoid resistance [Ohms]
+L = 0.05                  # Solenoid length of coil [m]
+m = 0.05                  # Permanent magnet mass [kg]
+g = 9.8                   # Acceleration due to gravity [m^2]          
 A = .01                   # Cross-sectional Area of Electromagnet Plunger [m^2]     
 P2 = .005                 # Permanent Magnet Flux [Wb]
 
 # Constant Defs
-x_0 = -0.03               # distance of levitation [m]
-ground = -0.2             # distance to ground [m] 
+x_0 = -0.03               # Distance of levitation [m]
+ground = -0.2             # Distance to ground [m] 
 
 # finding v_0      
 K_nov =  ((P2*N*A) / (4*np.pi*L*R)) * (1/(x_0**2))
